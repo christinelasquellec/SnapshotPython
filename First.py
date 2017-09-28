@@ -1,6 +1,6 @@
 import os
 import copy
-import glob
+from pprint import pprint
 
 
 def snapshot(chemin, profondeur=3, frequence=0, debug=False):
@@ -20,13 +20,19 @@ def walk2(chemin, profondeur):
             for x in walk2(os.path.join(chemin, name), profondeur-1):
                 yield x
 
+def getFiles(chemin, profondeur):
+    chemins = []
+    for x in walk2(chemin, profondeur):
+        #print(x)
+        chemins.append(x)
+    return chemins
+
 
 
 
 def myMain():
     #snapshot("C:\\Users\Christine\Documents\Travail\ISEN\M1\Cryptographie",2)
-    for x in walk2("C:\\Users\Christine\Documents\Travail\ISEN\M1", 2):
-        print(x)
+    pprint(getFiles("C:\\Users\Christine\Documents\Travail\ISEN\M1",2))
 
 
 if __name__ == "__main__":
