@@ -10,14 +10,14 @@ def snapshot(chemin, profondeur=3, frequence=0, debug=False):
             print(os.path.split(path))
             capture = copy.deepcopy(files)
 
-def walk2(top, maxdepth):
+def walk2(chemin, profondeur):
     dirs, nondirs = [], []
-    for name in os.listdir(top):
-        (dirs if os.path.isdir(os.path.join(top, name)) else nondirs).append(name)
-    yield top, dirs, nondirs
-    if maxdepth > 0:
+    for name in os.listdir(chemin):
+        (dirs if os.path.isdir(os.path.join(chemin, name)) else nondirs).append(name)
+    yield chemin, dirs, nondirs
+    if profondeur > 0:
         for name in dirs:
-            for x in walk2(os.path.join(top, name), maxdepth-1):
+            for x in walk2(os.path.join(chemin, name), profondeur-1):
                 yield x
 
 
